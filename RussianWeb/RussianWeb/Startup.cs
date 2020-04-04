@@ -28,7 +28,7 @@ namespace RussianWeb
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            var connection = @"Server=.;Database=RussianWeb;user id=sa;password=1;";
+            var connection = @"Server=.;Database=RusssianWeb;User Id=sa;Password=sa;password=1;";
             services.AddDbContext<RussianWebDbContext>
                 (options => options.UseSqlServer(connection));
         }
@@ -36,6 +36,19 @@ namespace RussianWeb
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            using (var serviceScope = app.ApplicationServices
+                .GetRequiredService<IServiceScopeFactory>()
+                .CreateScope())
+            {
+                using (var context = serviceScope.ServiceProvider.GetService<RussianWebDbContext>())
+                {
+                    if (context.Database.GetPendingMigrations().Any())
+                    {
+                        context.Database.Migrate();
+                    }
+                }
+            }
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
