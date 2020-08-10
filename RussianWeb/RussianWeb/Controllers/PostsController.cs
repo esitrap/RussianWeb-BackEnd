@@ -27,11 +27,26 @@ namespace RussianWeb.Controllers
             return await _context.Posts.ToListAsync();
         }
 
-        // GET: api/Posts/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Post>> GetPost(string id)
+        // // GET: api/Posts/5
+        // [HttpGet("{id}")]
+        // public async Task<ActionResult<Post>> GetPost(string id)
+        // {
+        //     var post = await _context.Posts.FindAsync(id);
+
+        //     if (post == null)
+        //     {
+        //         return NotFound();
+        //     }
+
+        //     return post;
+        // }
+
+        //**//
+        // GET: api/Posts/lkfls
+        [HttpGet("{onvan}")]
+        public async Task<ActionResult<Post>> GetPost(string onvan)
         {
-            var post = await _context.Posts.FindAsync(id);
+            var post = await _context.Posts.FirstOrDefaultAsync(x => x.Onvan == onvan);
 
             if (post == null)
             {
@@ -40,6 +55,7 @@ namespace RussianWeb.Controllers
 
             return post;
         }
+        //**//
 
         // PUT: api/Posts/5
         [HttpPut("{id}")]
