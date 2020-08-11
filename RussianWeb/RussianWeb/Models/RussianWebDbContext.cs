@@ -15,6 +15,7 @@ namespace RussianWeb.Models
 
         public DbSet<User> Users { get; set; }
         public DbSet <Post>Posts { get; set; }
+        public DbSet <Ax>Axes { get; set; }
     }  
 }
 

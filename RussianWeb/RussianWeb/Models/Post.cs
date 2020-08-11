@@ -13,6 +13,6 @@ namespace RussianWeb.Models
         public DateTime TarikheEnteshar { get; set; }
         public string KholaseyePost { get; set; }
         public string MatneKamelePost { get; set; }
-        public string Ax { get; set; }
+        public Guid AxId { get; set; }
     }
 }
